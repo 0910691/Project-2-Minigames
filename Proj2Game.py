@@ -1,4 +1,7 @@
 import pygame
+import sys
+import os
+import time
 
 pygame.init()
 
@@ -40,7 +43,7 @@ class GameMenu():
         self.screen = screen
         self.scr_width = self.screen.get_rect().width
         self.scr_height = self.screen.get_rect().height
-
+        self.funcs = funcs
         self.bg_color = bg_color
         self.clock = pygame.time.Clock()
 
@@ -68,6 +71,12 @@ class GameMenu():
                 if event.type == pygame.QUIT:
                     mainloop = False
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                    mpos = pygame.mouse.get_pos()
+                    for item in self.items:
+                        if item.is_mouse_selection(mpos):
+                            mainloop = False
+                            self.funcs[item.text]()
 
             # Redraw the background
             self.screen.fill(self.bg_color)
@@ -85,10 +94,18 @@ class GameMenu():
 
 
 if __name__ == "__main__":
+    def test_menu():
+        print ('Testing menu options')
+
     # Creating the screen
     screen = pygame.display.set_mode((640, 480), 0, 32)
 
-    menu_items = ('Start', 'Quit')
+    funcs = {'Start': test_menu,
+             'How to Play': sys.exit,
+             'Settings': sys.exit,
+             'Quit': sys.exit}
+
+    menu_items = ('Start', 'How to Play', 'Settings', 'Quit')
 
     pygame.display.set_caption('Game Menu')
     gm = GameMenu(screen, menu_items)
