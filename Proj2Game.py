@@ -5,7 +5,6 @@ import time
 
 pygame.init()
 
-
 class MenuItem(pygame.font.Font):
     def __init__(self, text, font=None, font_size=30,
     	         font_color=(255, 255, 255), xy=(0, 0)):
@@ -54,8 +53,6 @@ class GameMenu():
             # t_h: total height of text block
             t_h = len(items) * menu_item.height
             pos_x = (self.scr_width / 2) - (menu_item.width / 2)
-            # This line includes a bug fix by Ariel (Thanks!)
-            # Please check the comments section for an explanation
             pos_y = (self.scr_height / 2) - (t_h / 2) + ((index * 2) + index * menu_item.height)
 
             menu_item.set_position(pos_x, pos_y)
@@ -75,7 +72,7 @@ class GameMenu():
                     mpos = pygame.mouse.get_pos()
                     for item in self.items:
                         if item.is_mouse_selection(mpos):
-                            mainloop = False
+                            
                             self.funcs[item.text]()
 
             # Redraw the background
@@ -92,21 +89,27 @@ class GameMenu():
 
             pygame.display.flip()
 
-
 if __name__ == "__main__":
+
+    def exit_game():
+        sys.exit
+
     def test_menu():
-        print ('Testing menu options')
+        sys.exit
+
+    def how_to_play():
+      HowToPlay.howto()
 
     # Creating the screen
     screen = pygame.display.set_mode((640, 480), 0, 32)
 
     funcs = {'Start': test_menu,
-             'How to Play': sys.exit,
-             'Settings': sys.exit,
+             'How to Play': how_to_play,
+             'Settings': exit_game,
              'Quit': sys.exit}
 
     menu_items = ('Start', 'How to Play', 'Settings', 'Quit')
 
-    pygame.display.set_caption('Game Menu')
+    pygame.display.set_caption('Placeholder Title')
     gm = GameMenu(screen, menu_items)
     gm.run()
