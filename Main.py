@@ -2,6 +2,7 @@
 from pygame.locals import *
 from random import randrange
 import os
+import sys
 import pygame
 
 # Import pygameMenu
@@ -51,6 +52,12 @@ def random_color():
     :return: Color tuple
     """
     return randrange(0, 255), randrange(0, 255), randrange(0, 255)
+
+def G1HTP():
+    print ('test')
+
+def G2HTP():
+    print ('test')
 
 def G1(font):
     font.render('Game 1 goes here', 1, COLOR_WHITE)
@@ -122,6 +129,27 @@ play_menu.add_option('Game 1', G1)
 play_menu.add_option('Game 2', PYGAME_MENU_BACK)
 play_menu.add_option('Return to main menu', PYGAME_MENU_BACK)
 
+# HOW TO PLAY MENU
+how_to_play_menu = pygameMenu.Menu(surface,
+                            window_width=WINDOW_SIZE[0],
+                            window_height=WINDOW_SIZE[1],
+                            font=pygameMenu.fonts.FONT_BEBAS,
+                            title='How to Play',
+                            menu_alpha=100,
+                            font_size=30,
+                            menu_width=int(WINDOW_SIZE[0] * 0.6),
+                            menu_height=int(WINDOW_SIZE[1] * 0.6),
+                            bgfun=main_background,
+                            menu_color=MENU_BACKGROUND_COLOR,
+                            option_shadow=False,
+                            font_color=COLOR_BLACK,
+                            color_selected=COLOR_WHITE,
+                            onclose=PYGAME_MENU_DISABLE_CLOSE
+                            )
+how_to_play_menu.add_option('Game 1', G1HTP)
+how_to_play_menu.add_option('Game 2', G2HTP)
+how_to_play_menu.add_option('Return to main menu', PYGAME_MENU_BACK)
+
 # ABOUT MENU
 about_menu = pygameMenu.TextMenu(surface,
                                  window_width=WINDOW_SIZE[0],
@@ -164,7 +192,7 @@ main_menu = pygameMenu.Menu(surface,
                             color_selected=COLOR_WHITE,
                             )
 main_menu.add_option('Play', play_menu)
-main_menu.add_option('How To Play', play_menu)
+main_menu.add_option('How To Play', how_to_play_menu)
 main_menu.add_option('About', about_menu)
 main_menu.add_option('Quit', PYGAME_MENU_EXIT)
 
