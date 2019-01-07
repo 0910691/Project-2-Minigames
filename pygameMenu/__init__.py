@@ -20,6 +20,6 @@ from pygameMenu.textmenu import TextMenu
 import pygameMenu.fonts as fonts
 
 # Other
-__author__ = 'John Rossel & Soner ???'
-__email__ = 'pablo.pizarro@ing.uchile.cl'
+__author__ = 'John Rossel & Delano ???'
+__email__ = '0910691@hr.nl'
 __version__ = 'v1.0 (03/20/2018)'
